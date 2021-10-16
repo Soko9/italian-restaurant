@@ -1,14 +1,16 @@
-import { Navbar, NavbarBrand } from 'reactstrap';
+import { Navbar } from 'reactstrap';
 import './App.css';
+import Menu from './components/Menu.js';
 
 function App() {
   return (
-    <div className="App">
-      <Navbar dark color="primary">
+    <div>
+      <Navbar light color="warning">
         <div className="container">
-          <NavbarBrand href="/">Restorante Con Fusion</NavbarBrand>
+          <p className="display-4">Restorante Con Fusion</p>
         </div>
       </Navbar>
+      <Menu />
     </div>
   );
 }
