@@ -21,7 +21,7 @@ class Menu extends Component {
         this.setState({ selectedDish: dish });
     }
 
-    renderDish(dish) {
+    renderDishWithDetails(dish) {
         if(dish != null) {
             return(
                 <>
@@ -40,7 +40,9 @@ class Menu extends Component {
                             return(
                                 <div key={comment.id}>
                                     <p>{comment.comment}</p>
-                                    <p>-- {comment.author}, {comment.date.toString().substring(0, 10)}</p>
+                                    <p>-- {comment.author},&nbsp;
+                                    {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(comment.date)))}
+                                    </p>
                                 </div>
                             );
                         })}
@@ -72,7 +74,7 @@ class Menu extends Component {
                     {menu}
                 </div>
                 <div className="row">
-                    {this.renderDish(this.state.selectedDish)}
+                    {this.renderDishWithDetails(this.state.selectedDish)}
                 </div>
             </div>
         );
