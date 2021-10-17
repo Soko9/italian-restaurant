@@ -3,67 +3,25 @@ import {
     Card,
     CardImg,
     CardImgOverlay,
-    CardBody,
     CardTitle,
-    CardText
+    Breadcrumb,
+    BreadcrumbItem
 } from 'reactstrap';
+import { Link } from 'react-router-dom';
 
 class Menu extends Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            selectedDish: null
-        }
-    }
-
-    onDishSelected(dish) {
-        this.setState({ selectedDish: dish });
-    }
-
-    renderDishWithDetails(dish) {
-        if(dish != null) {
-            return(
-                <>
-                    <div className="col-12 col-md-5 m-1">
-                        <Card>
-                            <CardImg height="310px" src={dish.image} alt={dish.name} />
-                            <CardBody>
-                                <CardTitle>{dish.name}</CardTitle>
-                                <CardText>{dish.description}</CardText>
-                            </CardBody>
-                        </Card>
-                    </div>
-                    <div className="col-12 col-md-5 m-1">
-                        <h2>Comments</h2><br/>
-                        {this.state.selectedDish.comments.map(comment => {
-                            return(
-                                <div key={comment.id}>
-                                    <p>{comment.comment}</p>
-                                    <p>-- {comment.author},&nbsp;
-                                    {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(comment.date)))}
-                                    </p>
-                                </div>
-                            );
-                        })}
-                    </div>
-                </>
-            );
-        } else {
-            return(<div></div>);
-        }
-    }
-
     render() {
         const menu = this.props.dishes.map(dish => {
             return(
-                <div key={dish.id} className="col-12 col-md-5 m-1">
-                    <Card onClick={() => this.onDishSelected(dish)}>
-                        <CardImg height="310px" src={dish.image} alt={dish.name} className="opacity-25"/>
-                        <CardImgOverlay>
-                            <CardTitle className="display-6 fw-bold text-warning text-center p-3">{dish.name}</CardTitle>
-                        </CardImgOverlay>
-                    </Card>
+                <div key={dish.id} style={{width: '320px', cursor: 'pointer'}} className="col-12 col-md-5 m-1">
+                    <Link to={`/menu/${dish.id}`}>
+                        <Card>
+                            <CardImg height="310" src={dish.image} alt={dish.name} className="opacity-25"/>
+                            <CardImgOverlay>
+                                <CardTitle className="fs-2 fw-bold text-muted text-center opacity-75 p-3">{dish.name}</CardTitle>
+                            </CardImgOverlay>
+                        </Card>
+                    </Link>
                 </div>
             );
         });
@@ -71,10 +29,22 @@ class Menu extends Component {
         return (
             <div className="container">
                 <div className="row">
-                    {menu}
+                    <Breadcrumb>
+                        <BreadcrumbItem>
+                            <Link to="/home">Home</Link>
+                        </BreadcrumbItem>
+                        
+                        <BreadcrumbItem active>
+                            Menu
+                        </BreadcrumbItem>
+                    </Breadcrumb>
+                    <div className="col-12">
+                        <h2>Menu</h2>
+                        <hr/>
+                    </div>
                 </div>
                 <div className="row">
-                    {this.renderDishWithDetails(this.state.selectedDish)}
+                    {menu}
                 </div>
             </div>
         );
