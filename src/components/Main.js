@@ -55,6 +55,12 @@ class Main extends Component {
       );
     }
 
+    const ContactPage = () => {
+      return(
+        <Contact />
+      );
+    }
+
     return (
       <div>
         <Header />
@@ -64,7 +70,7 @@ class Main extends Component {
           <Route exact path="/menu" component={MenuPage} />
           <Route path="/menu/:dishId" component={DishPage} />
           <Route exact path="/about" component={AboutPage} />
-          <Route exact path="/contact" component={Contact} />
+          <Route exact path="/contact" component={ContactPage} />
           <Redirect to="/home" />
         </Switch>
         <br/>
