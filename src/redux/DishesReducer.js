@@ -1,8 +1,18 @@
-import { DISHES } from '../shared/dishes.js';
+import * as ActionTypes from './ActionTypes.js';
 
-export const DishReducer = (state = DISHES, action) => {
-    switch(action.type) {
-        default:
-            return state;
-    }
+export const DishReducer = (state = {
+        isLoading: true,
+        err: null,
+        dishes: []
+    }, action) => {
+        switch(action.type) {
+            case ActionTypes.DISHES_LOADING:
+                return {...state, isLoading: true, err: null, dishes: []}
+            case ActionTypes.DISHES_FAILED:
+                return {...state, isLoading: false, err: action.payload, dishes: []}
+            case ActionTypes.ADD_DISHES:
+                return {...state, isLoading: false, err: null, dishes: action.payload}
+            default:
+                return state;
+        }
 }

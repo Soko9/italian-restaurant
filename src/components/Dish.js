@@ -20,6 +20,7 @@ import {
     Errors
 } from 'react-redux-form';
 import { Link } from 'react-router-dom';
+import Loader from './Loader.js';
 
 const DishCard = ({ dish }) => {
     return(
@@ -129,40 +130,60 @@ const DishDetails = ({ dish, comments, addComment, dishId }) => {
     );
 }
 
-function Dish({ dish, comments, addComment }) {
-    return (
-        <>
+function Dish({ dish, isLoading, errMsg, comments, addComment }) {
+    if (isLoading) {
+        return (
             <div className="container">
                 <div className="row">
-                    <Breadcrumb>
-                        <BreadcrumbItem>
-                            <Link to="/home">Home</Link>
-                        </BreadcrumbItem>
-
-                        <BreadcrumbItem>
-                            <Link to="/menu">Menu</Link>
-                        </BreadcrumbItem>
-                        
-                        <BreadcrumbItem active>
-                            {dish.name}
-                        </BreadcrumbItem>
-                    </Breadcrumb>
-                    <div className="col-12">
-                        <h2>{dish.name}</h2>
-                        <hr/>
-                    </div>
-                </div>
-                <div className="row">
-                    <div className="col-6 col-md-5 m-1">
-                        <DishCard dish={dish} />
-                    </div>
-                    <div className="col-6 col-md-5 m-1">
-                        <DishDetails dish={dish} comments={comments} addComment={addComment} dishId={dish.id} />
-                    </div>
+                    <Loader/>
                 </div>
             </div>
-        </>
-    );
+        );
+    }
+    else if (errMsg) {
+        return (
+            <div className="container">
+                <div className="row">
+                    <h3>{errMsg}</h3>
+                </div>
+            </div>
+        );
+    }
+    else if (dish != null) {
+        return (
+            <>
+                <div className="container">
+                    <div className="row">
+                        <Breadcrumb>
+                            <BreadcrumbItem>
+                                <Link to="/home">Home</Link>
+                            </BreadcrumbItem>
+    
+                            <BreadcrumbItem>
+                                <Link to="/menu">Menu</Link>
+                            </BreadcrumbItem>
+                            
+                            <BreadcrumbItem active>
+                                {dish.name}
+                            </BreadcrumbItem>
+                        </Breadcrumb>
+                        <div className="col-12">
+                            <h2>{dish.name}</h2>
+                            <hr/>
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col-6 col-md-5 m-1">
+                            <DishCard dish={dish} />
+                        </div>
+                        <div className="col-6 col-md-5 m-1">
+                            <DishDetails dish={dish} comments={comments} addComment={addComment} dishId={dish.id} />
+                        </div>
+                    </div>
+                </div>
+            </>
+        );
+    }
 }
 
 export default Dish;

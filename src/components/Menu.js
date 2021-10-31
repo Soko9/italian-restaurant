@@ -8,10 +8,11 @@ import {
     BreadcrumbItem
 } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import Loader from './Loader.js';
 
 class Menu extends Component {
     render() {
-        const menu = this.props.dishes.map(dish => {
+        const menu = this.props.dishes.dishes.map(dish => {
             return(
                 <div key={dish.id} style={{width: '320px', cursor: 'pointer'}} className="col-12 col-md-5 m-1">
                     <Link to={`/menu/${dish.id}`}>
@@ -26,28 +27,45 @@ class Menu extends Component {
             );
         });
 
-        return (
-            <div className="container">
-                <div className="row">
-                    <Breadcrumb>
-                        <BreadcrumbItem>
-                            <Link to="/home">Home</Link>
-                        </BreadcrumbItem>
-                        
-                        <BreadcrumbItem active>
-                            Menu
-                        </BreadcrumbItem>
-                    </Breadcrumb>
-                    <div className="col-12">
-                        <h2>Menu</h2>
-                        <hr/>
+        if (this.props.dishes.isLoading)
+            return (
+                <div className="container">
+                    <div className="row">
+                        <Loader/>
                     </div>
                 </div>
-                <div className="row">
-                    {menu}
+            );
+        else if (this.props.dishes.err)
+            return (
+                <div className="container">
+                    <div className="row">
+                        <h3>{this.props.dishes.err}</h3>
+                    </div>
                 </div>
-            </div>
-        );
+            );
+        else
+            return (
+                <div className="container">
+                    <div className="row">
+                        <Breadcrumb>
+                            <BreadcrumbItem>
+                                <Link to="/home">Home</Link>
+                            </BreadcrumbItem>
+                            
+                            <BreadcrumbItem active>
+                                Menu
+                            </BreadcrumbItem>
+                        </Breadcrumb>
+                        <div className="col-12">
+                            <h2>Menu</h2>
+                            <hr/>
+                        </div>
+                    </div>
+                    <div className="row">
+                        {menu}
+                    </div>
+                </div>
+            );
     }
 }
 
