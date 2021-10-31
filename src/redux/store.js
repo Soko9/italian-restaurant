@@ -1,10 +1,17 @@
-import { createStore } from 'redux';
-import { Reducer, initialState } from './reducer.js';
+import { createStore, combineReducers } from 'redux';
+import { DishReducer } from './DishesReducer.js';
+import { CommentReducer } from './CommentsReducer.js';
+import { PromotionReducer } from './PromotionsReducer.js';
+import { LeaderReducer } from './leadersReducer.js';
 
 export const Store = () => {
     const store = createStore(
-        Reducer,
-        initialState
+        combineReducers({
+            dishes: DishReducer,
+            comments: CommentReducer,
+            promotions: PromotionReducer,
+            leaders: LeaderReducer
+        })
     );
 
     return store;

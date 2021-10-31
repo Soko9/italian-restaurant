@@ -12,8 +12,7 @@ import {
     Row,
     Modal,
     ModalHeader,
-    ModalBody,
-    ModalFooter
+    ModalBody
 } from 'reactstrap';
 import {
     LocalForm,
@@ -34,7 +33,7 @@ const DishCard = ({ dish }) => {
     );
 }
 
-const DishDetails = ({ dish, comments }) => {
+const DishDetails = ({ dish, comments, addComment, dishId }) => {
     const [modal, toggleModal] = useState(false);
 
     const isMax = len => val => !val || (val.length <= len);
@@ -46,7 +45,7 @@ const DishDetails = ({ dish, comments }) => {
 
     const handleSubmitEvent = values => {
         handleToggle()
-        alert("Current State: " + JSON.stringify(values));
+        addComment(dishId, values.rating, values.author, values.comment);
     }
 
     return(
@@ -130,7 +129,7 @@ const DishDetails = ({ dish, comments }) => {
     );
 }
 
-function Dish({ dish, comments }) {
+function Dish({ dish, comments, addComment }) {
     return (
         <>
             <div className="container">
@@ -158,7 +157,7 @@ function Dish({ dish, comments }) {
                         <DishCard dish={dish} />
                     </div>
                     <div className="col-6 col-md-5 m-1">
-                        <DishDetails dish={dish} comments={comments} />
+                        <DishDetails dish={dish} comments={comments} addComment={addComment} dishId={dish.id} />
                     </div>
                 </div>
             </div>
