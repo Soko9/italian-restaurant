@@ -7,11 +7,12 @@ import {
 } from 'reactstrap';
 import {
     Control,
-    LocalForm,
-    Errors
+    Form,
+    Errors,
+    actions
 } from 'react-redux-form';
 
-const ContactForm = () => {
+const ContactForm = ({ resetFeedback }) => {
     const isRequired = val => val && val.length;
     const isMax = len => val => !val || (val.length <= len);
     const isMin = len => val => val && (val.length >= len);
@@ -20,10 +21,11 @@ const ContactForm = () => {
 
     const handleSubmitEvent = values => {
         alert("Current State: " + JSON.stringify(values));
+        resetFeedback();
     }
 
     return (
-        <LocalForm onSubmit={(values) => handleSubmitEvent(values)}>
+        <Form model="feedback" onSubmit={(values) => handleSubmitEvent(values)}>
             <Row className="form-group">
                 <Label md={3} htmlFor="firstName" className="fw-bold fs-6 text-center">First Name</Label>
                 <Col md={9}>
@@ -187,7 +189,7 @@ const ContactForm = () => {
                     </Button>
                 </Col>
             </Row>
-        </LocalForm>
+        </Form>
     );
 }
 
