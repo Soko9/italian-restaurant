@@ -48,11 +48,11 @@ class Menu extends Component {
                 <div className="container">
                     <div className="row">
                         <Breadcrumb>
-                            <BreadcrumbItem>
+                            <BreadcrumbItem className="bread">
                                 <Link to="/home">Home</Link>
                             </BreadcrumbItem>
                             
-                            <BreadcrumbItem active>
+                            <BreadcrumbItem className="bread">
                                 Menu
                             </BreadcrumbItem>
                         </Breadcrumb>

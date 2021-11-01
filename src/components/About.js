@@ -8,7 +8,7 @@ function About(props) {
         return (
             <Media tag="li" className="m-5">
                 <Media style={{float: 'left'}} className="m-4">
-                    <Media object src={leader.image} alt={leader.name} />
+                    <Media object src={leader.image} width={150} alt={leader.name} />
                 </Media>
                 <Media body className="m-5">
                     <Media heading>{leader.name}</Media>
@@ -23,8 +23,12 @@ function About(props) {
         <div className="container">
             <div className="row">
                 <Breadcrumb>
-                    <BreadcrumbItem><Link to="/home">Home</Link></BreadcrumbItem>
-                    <BreadcrumbItem active>About Us</BreadcrumbItem>
+                    <BreadcrumbItem className="bread">
+                        <Link to="/home">Home</Link>
+                    </BreadcrumbItem>
+                    <BreadcrumbItem className="bread">
+                        About Us
+                    </BreadcrumbItem>
                 </Breadcrumb>
                 <div className="col-12">
                     <h3>About Us</h3>
@@ -34,10 +38,10 @@ function About(props) {
             <div className="row row-content">
                 <div className="col-12 col-md-6">
                     <h2>Our History</h2>
-                    <p>Started in 2010, Ristorante con Fusion quickly established itself as a culinary icon par excellence in Hong Kong. With its unique brand of world fusion cuisine that can be found nowhere else, it enjoys patronage from the A-list clientele in Hong Kong.  Featuring four of the best three-star Michelin chefs in the world, you never know what will arrive on your plate the next time you visit us.</p>
+                    <p>Started in 2010, M Tucci S quickly established itself as a culinary icon par excellence in Hong Kong. With its unique brand of world fusion cuisine that can be found nowhere else, it enjoys patronage from the A-list clientele in Hong Kong.  Featuring four of the best three-star Michelin chefs in the world, you never know what will arrive on your plate the next time you visit us.</p>
                     <p>The restaurant traces its humble beginnings to <em>The Frying Pan</em>, a successful chain started by our CEO, Mr. Peter Pan, that featured for the first time the world's best cuisines in a pan.</p>
                 </div>
-                <div className="col-12 col-md-5">
+                <div className="col-12 col-md-5 offset-1">
                     <Card>
                         <CardHeader className="bg-primary text-white">Facts At a Glance</CardHeader>
                         <CardBody>

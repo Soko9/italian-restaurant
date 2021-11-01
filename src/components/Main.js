@@ -92,7 +92,7 @@ class Main extends Component {
           <Route exact path="/contact" component={ContactPage} />
           <Redirect to="/home" />
         </Switch>
-        <br/>
+        {/* <br/> */}
         <Footer />
       </div>
     );

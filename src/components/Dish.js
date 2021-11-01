@@ -155,15 +155,15 @@ function Dish({ dish, isLoading, errMsg, comments, addComment }) {
                 <div className="container">
                     <div className="row">
                         <Breadcrumb>
-                            <BreadcrumbItem>
+                            <BreadcrumbItem className="bread">
                                 <Link to="/home">Home</Link>
                             </BreadcrumbItem>
     
-                            <BreadcrumbItem>
+                            <BreadcrumbItem className="bread">
                                 <Link to="/menu">Menu</Link>
                             </BreadcrumbItem>
                             
-                            <BreadcrumbItem active>
+                            <BreadcrumbItem className="bread">
                                 {dish.name}
                             </BreadcrumbItem>
                         </Breadcrumb>
