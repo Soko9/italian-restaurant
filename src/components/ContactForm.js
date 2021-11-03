@@ -8,8 +8,7 @@ import {
 import {
     Control,
     Form,
-    Errors,
-    actions
+    Errors
 } from 'react-redux-form';
 
 const ContactForm = ({ resetFeedback }) => {

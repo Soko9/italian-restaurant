@@ -21,11 +21,12 @@ import {
 } from 'react-redux-form';
 import { Link } from 'react-router-dom';
 import Loader from './Loader.js';
+import { url } from '../shared/connection.js';
 
 const DishCard = ({ dish }) => {
     return(
         <Card style={{width: '380px'}}>
-            <CardImg src={dish.image} alt={dish.name} />
+            <CardImg src={`${url}/${dish.image}`} alt={dish.name} />
             <CardBody>
                 <CardTitle>{dish.name}</CardTitle>
                 <CardText>{dish.description}</CardText>
@@ -34,7 +35,7 @@ const DishCard = ({ dish }) => {
     );
 }
 
-const DishDetails = ({ dish, comments, addComment, dishId }) => {
+const DishDetails = ({ dish, comments, postComment, dishId }) => {
     const [modal, toggleModal] = useState(false);
 
     const isMax = len => val => !val || (val.length <= len);
@@ -46,12 +47,18 @@ const DishDetails = ({ dish, comments, addComment, dishId }) => {
 
     const handleSubmitEvent = values => {
         handleToggle()
-        addComment(dishId, values.rating, values.author, values.comment);
+        postComment(dishId, values.rating, values.author, values.comment);
     }
 
     return(
         <>
-            <h2>Comments</h2><br/>
+            <div className="wrapper">
+                <h2>Comments</h2>
+                <Button className="btn-add" color="primary" onClick={handleToggle}>
+                    <span className="fa fa-plus fa-lg"></span>
+                </Button>
+            </div>
+            <br/>
             {comments.map(comment => {
                 if(comment.dishId === dish.id) {
                     return (
@@ -65,10 +72,6 @@ const DishDetails = ({ dish, comments, addComment, dishId }) => {
                 }
                 return (<div></div>);
             })}
-            <br/>
-            <Button outline onClick={handleToggle}>
-                Add Comment
-            </Button>
             <Modal isOpen={modal} toggle={handleToggle}>
                 <ModalHeader closeButton>Comment</ModalHeader>
                 <ModalBody>
@@ -130,7 +133,7 @@ const DishDetails = ({ dish, comments, addComment, dishId }) => {
     );
 }
 
-function Dish({ dish, isLoading, errMsg, comments, addComment }) {
+function Dish({ dish, isLoading, errMsg, comments, errMsgComments, postComment }) {
     if (isLoading) {
         return (
             <div className="container">
@@ -145,6 +148,14 @@ function Dish({ dish, isLoading, errMsg, comments, addComment }) {
             <div className="container">
                 <div className="row">
                     <h3>{errMsg}</h3>
+                </div>
+            </div>
+        );
+    } else if (errMsgComments) {
+        return (
+            <div className="container">
+                <div className="row">
+                    <h3>{errMsgComments}</h3>
                 </div>
             </div>
         );
@@ -177,7 +188,7 @@ function Dish({ dish, isLoading, errMsg, comments, addComment }) {
                             <DishCard dish={dish} />
                         </div>
                         <div className="col-6 col-md-5 m-1">
-                            <DishDetails dish={dish} comments={comments} addComment={addComment} dishId={dish.id} />
+                            <DishDetails dish={dish} comments={comments} postComment={postComment} dishId={dish.id} />
                         </div>
                     </div>
                 </div>

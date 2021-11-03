@@ -30,12 +30,12 @@ function Footer() {
                     </address>
                 </div>
                 <div className="col-12 col-sm-3 social">
-                    <div className="text-center">
-                        <a className="btn btn-social-icon btn-google" href="http://google.com/+"><i className="fa fa-google-plus-square"></i></a>
+                    <div className="text-center mt-lg-5">
                         <a className="btn btn-social-icon btn-facebook" href="http://www.facebook.com/profile.php?id="><i className="fa fa-facebook-square"></i></a>
-                        <a className="btn btn-social-icon btn-linkedin" href="http://www.linkedin.com/in/"><i className="fa fa-linkedin-square"></i></a><br/>
                         <a className="btn btn-social-icon btn-twitter" href="http://twitter.com/"><i className="fa fa-twitter-square"></i></a>
+                        <a className="btn btn-social-icon btn-linkedin" href="http://www.linkedin.com/in/"><i className="fa fa-linkedin-square"></i></a><br/>
                         <a className="btn btn-social-icon btn-google" href="http://youtube.com/"><i className="fa fa-youtube-square"></i></a>
+                        <a className="btn btn-social-icon btn-google" href="http://google.com/+"><i className="fa fa-google-plus-square"></i></a>
                     </div>
                 </div>
             </div>

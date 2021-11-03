@@ -8,6 +8,7 @@ import {
     CardText
 } from 'reactstrap';
 import Loader from './Loader.js';
+import { url } from '../shared/connection.js';
 
 const RenderCard = ({ item, isLoading, errMsg }) => {
     if (isLoading)
@@ -17,7 +18,7 @@ const RenderCard = ({ item, isLoading, errMsg }) => {
     else
         return (
             <Card>
-                <CardImg src={item.image} alt={item.name} />
+                <CardImg src={`${url}/${item.image}`} alt={item.name} />
                 <CardBody>
                     <CardTitle>{item.name}</CardTitle>
                     {item.designation
@@ -29,7 +30,7 @@ const RenderCard = ({ item, isLoading, errMsg }) => {
         );
 }
 
-function Home({ dish, isLoading, errMsg, promotion, leader}) {
+function Home({ dish, isLoading, errMsg, promotion, isLoadingPromo, errMsgPromo, leader}) {
     return (
         <div className="container">
             <div className="row align-items-start">
@@ -38,7 +39,7 @@ function Home({ dish, isLoading, errMsg, promotion, leader}) {
                 </div>
 
                 <div className="col-12 col-md m-1">
-                    <RenderCard item={promotion} />
+                    <RenderCard item={promotion} isLoading={isLoadingPromo} errMsg={errMsgPromo} />
                 </div>
 
                 <div className="col-12 col-md m-1">

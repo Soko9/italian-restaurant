@@ -8,7 +8,7 @@ import Contact from './Contact.js';
 import Dish from './Dish.js';
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { addComment, fetchDishes } from '../redux/ActionCreators.js';
+import { postComment, fetchDishes, fetchComments, fetchPromos } from '../redux/ActionCreators.js';
 import { actions } from 'react-redux-form';
 
 const mapStateToProps = (state) => {
@@ -21,14 +21,18 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = dispatch => ({
-  addComment: (dishId, rating, author, comment) => dispatch(addComment(dishId, rating, author, comment)),
+  postComment: (dishId, rating, author, comment) => dispatch(postComment(dishId, rating, author, comment)),
   fetchDishes: () => {dispatch(fetchDishes())},
-  resetFeedback: () => {dispatch(actions.reset("feedback"))}
+  resetFeedback: () => {dispatch(actions.reset("feedback"))},
+  fetchComments: () => {dispatch(fetchComments())},
+  fetchPromos: () => {dispatch(fetchPromos())}
 });
 
 class Main extends Component {
   componentDidMount() {
     this.props.fetchDishes();
+    this.props.fetchComments();
+    this.props.fetchPromos();
   }
 
   render() {
@@ -38,7 +42,9 @@ class Main extends Component {
           dish={this.props.dishes.dishes.filter(dish => dish.featured)[0]}
           isLoading={this.props.dishes.isLoading}
           errMsg={this.props.dishes.err}
-          promotion={this.props.promotions.filter(promo => promo.featured)[0]}
+          promotion={this.props.promotions.promotions.filter(promo => promo.featured)[0]}
+          isLoadingPromo={this.props.promotions.isLoading}
+          errMsgPromo={this.props.promotions.err}
           leader={this.props.leaders.filter(leader => leader.featured)[0]} 
         />
       );
@@ -58,8 +64,9 @@ class Main extends Component {
           dish={this.props.dishes.dishes.filter(dish => dish.id === parseInt(match.params.dishId, 10))[0]}
           isLoading={this.props.dishes.isLoading}
           errMsg={this.props.dishes.err}
-          comments={this.props.comments}
-          addComment={this.props.addComment}
+          comments={this.props.comments.comments}
+          errMsgComments={this.props.comments.err}
+          postComment={this.props.postComment}
         />
       );
     }
@@ -92,7 +99,7 @@ class Main extends Component {
           <Route exact path="/contact" component={ContactPage} />
           <Redirect to="/home" />
         </Switch>
-        {/* <br/> */}
+        <br/>
         <Footer />
       </div>
     );
