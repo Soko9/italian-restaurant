@@ -9,6 +9,7 @@ import {
 } from 'reactstrap';
 import Loader from './Loader.js';
 import { url } from '../shared/connection.js';
+import { FadeTransform } from 'react-animation-components';
 
 const RenderCard = ({ item, isLoading, errMsg }) => {
     if (isLoading)
@@ -17,20 +18,26 @@ const RenderCard = ({ item, isLoading, errMsg }) => {
         return (<h3>{errMsg}</h3>);
     else
         return (
-            <Card>
-                <CardImg src={`${url}/${item.image}`} alt={item.name} />
-                <CardBody>
-                    <CardTitle>{item.name}</CardTitle>
-                    {item.designation
-                    ? <CardSubtitle>{item.designation}</CardSubtitle>
-                    : null}
-                    <CardText>{item.description}</CardText>
-                </CardBody>
-            </Card>
+            <FadeTransform
+                in
+                transformProps={{
+                    exitTransform: 'scale(0.5) translateY(-50%)'
+                }}>
+                <Card>
+                    <CardImg src={`${url}/${item.image}`} alt={item.name} />
+                    <CardBody>
+                        <CardTitle>{item.name}</CardTitle>
+                        {item.designation
+                        ? <CardSubtitle>{item.designation}</CardSubtitle>
+                        : null}
+                        <CardText>{item.description}</CardText>
+                    </CardBody>
+                </Card>
+            </FadeTransform>
         );
 }
 
-function Home({ dish, isLoading, errMsg, promotion, isLoadingPromo, errMsgPromo, leader}) {
+function Home({ dish, isLoading, errMsg, promotion, isLoadingPromo, errMsgPromo, leader, isLoadingLeader, errMsgLeader}) {
     return (
         <div className="container">
             <div className="row align-items-start">
@@ -43,7 +50,7 @@ function Home({ dish, isLoading, errMsg, promotion, isLoadingPromo, errMsgPromo,
                 </div>
 
                 <div className="col-12 col-md m-1">
-                    <RenderCard item={leader} />
+                    <RenderCard item={leader} isLoading={isLoadingLeader} errMsg={errMsgLeader} />
                 </div>
             </div>
         </div>

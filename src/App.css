@@ -23,26 +23,26 @@ a:hover {
     padding-right: 8px;
     font-size: 16px;
     color: floralwhite;
-    margin-right: 10px;
+    margin: 0 10px 5px 0;
     cursor: pointer;
 }
 
 .row-header{
-    margin:0px auto;
-    padding:0px auto;
+    margin:0 auto;
+    padding:0 auto;
 }
 
 .row-content {
-    margin:0px auto;
-    padding: 50px 0px 50px 0px;
+    margin:0 auto;
+    padding: 50px 0 50px 0;
     border-bottom: 1px ridge;
     min-height:400px;
 }
 
 .footer{
     background-color: #2b2b2b;
-    margin:0px auto;
-    padding: 20px 0px 20px 0px;
+    margin:0 auto;
+    padding: 1.2rem 0;
     color: floralwhite;
 }
 
@@ -76,9 +76,22 @@ address{
     background-color: #37a5ff;
 }
 
+.nav-menu {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-grow: 1;
+}
+
 .nav-link {
-    margin: 0 30px;
+    width: fit-content;
     color: white;
+    font-size: 1.05rem;
+    flex-wrap: nowrap;
+}
+
+.nav-link span {
+    margin: 0 2px;
 }
 
 .nav-link:hover {
@@ -103,6 +116,7 @@ address{
 }
 
 .logo {
+    width: 3rem;
     position: relative;
     z-index: 99;
 }
@@ -129,4 +143,26 @@ address{
     align-items: center;
     justify-content: center;
     border-radius: 50%;
+}
+
+.page-enter {
+    opacity: 0.01;
+    transform: translateX(-100%);
+}
+
+.page-enter-active {
+    opacity: 1;
+    transform: translateX(0%);
+    transition: all 520ms ease-in-out;
+}
+
+.page-exit {
+    opacity: 1;
+    transform: translateX(0%);
+}
+
+.page-exit-active {
+    opacity: 0.01;
+    transform: translateX(100%);
+    transition: all 520ms ease-in-out;
 }

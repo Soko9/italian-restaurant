@@ -6,7 +6,7 @@ import {
 import ContactForm from './ContactForm.js';
 import { Link } from 'react-router-dom';
 
-const Contact = ({ resetFeedback }) => {
+const Contact = ({ feedbacks, postFeedback, resetFeedback }) => {
     return (
         <div className="container">
             <div className="row">
@@ -52,7 +52,7 @@ const Contact = ({ resetFeedback }) => {
                 </div>
                 <div className="row"><div className="col-12"><br/><br/></div></div>
                 <div className="col-12 col-md-9">
-                    <ContactForm resetFeedback={resetFeedback} />
+                    <ContactForm feedbacks={feedbacks} postFeedback={postFeedback} resetFeedback={resetFeedback} />
                 </div>
             </div>
         </div>

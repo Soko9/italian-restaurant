@@ -55,31 +55,31 @@ class Header extends Component {
                     <div className="container">
                         <NavbarToggler onClick={this.toggleNavbar} />
                         <NavbarBrand className="mr-auto menu" href="/">
-                            <img src="./assets/images/logo.png" className="logo" width="200" alt="Restorante Con Fusion" />
+                            <img src="./assets/images/logo.png" className="logo" alt="Restorante Con Fusion" />
                         </NavbarBrand>
                         <Collapse isOpen={this.state.isNavOpen} navbar>
-                            <Nav className="ms-auto" navbar>
+                            <Nav className="ms-auto nav-menu" navbar>
                                 <NavItem>
                                     <NavLink className="nav-link" to="/home">
-                                        <span className="fa fa-home fa-sm" center></span> Home
+                                        <span className="fa fa-home fa-sm" center></span><span>Home</span>
                                     </NavLink>
                                 </NavItem>
 
                                 <NavItem>
                                     <NavLink className="nav-link" to="/menu">
-                                        <span className="fa fa-bars fa-sm"></span> Menu
+                                        <span className="fa fa-bars fa-sm"></span><span>Menu</span>
                                     </NavLink>
                                 </NavItem>
 
                                 <NavItem>
                                     <NavLink className="nav-link" to="/about">
-                                        <span className="fa fa-info fa-sm"></span> About Us
+                                        <span className="fa fa-info fa-sm"></span><span>About Us</span>
                                     </NavLink>
                                 </NavItem>
 
                                 <NavItem>
                                     <NavLink className="nav-link" to="/contact">
-                                        <span className="fa fa-share-alt fa-sm"></span> Contact Us
+                                        <span className="fa fa-share-alt fa-sm"></span><span>Contact Us</span>
                                     </NavLink>
                                 </NavItem>
                             </Nav>

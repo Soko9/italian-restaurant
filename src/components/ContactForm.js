@@ -11,7 +11,7 @@ import {
     Errors
 } from 'react-redux-form';
 
-const ContactForm = ({ resetFeedback }) => {
+const ContactForm = ({ feedbacks, postFeedback, resetFeedback }) => {
     const isRequired = val => val && val.length;
     const isMax = len => val => !val || (val.length <= len);
     const isMin = len => val => val && (val.length >= len);
@@ -19,8 +19,9 @@ const ContactForm = ({ resetFeedback }) => {
     const isEmail = val => /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(val);
 
     const handleSubmitEvent = values => {
-        alert("Current State: " + JSON.stringify(values));
+        postFeedback(values.firstName, values.lastName, values.email, values.telNum, values.agree, values.contactType, values.message);
         resetFeedback();
+        // alert(feedbacks.filter(feedback => feedback.id%2 == 0));
     }
 
     return (

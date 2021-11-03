@@ -1,8 +1,18 @@
-import { LEADERS } from '../shared/leaders.js';
+import * as ActionTypes from './ActionTypes.js';
 
-export const LeaderReducer = (state = LEADERS, action) => {
-    switch(action.type) {
-        default:
-            return state;
-    }
+export const LeaderReducer = (state = {
+        isLoading: true,
+        err: null,
+        leaders: []
+    }, action) => {
+        switch(action.type) {
+            case ActionTypes.LEADERS_LOADING:
+                return {...state, isLoading: true, err: null, leaders: []}
+            case ActionTypes.LEADERS_FAILED:
+                return {...state, isLoading: false, err: action.payload, leaders: []}
+            case ActionTypes.ADD_LEADERS:
+                return {...state, isLoading: false, err: null, leaders: action.payload}
+            default:
+                return state;
+        }
 }

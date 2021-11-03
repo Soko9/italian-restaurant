@@ -146,3 +146,115 @@ export const fetchPromos = () => (dispatch) => {
         .then(promos => dispatch(addPromos(promos)))
         .catch(err => dispatch(promosFailed(err.message)));
 }
+
+// LEADERS
+
+export const leadersLoading = () => ({
+    type: ActionTypes.LEADERS_LOADING
+});
+
+export const leadersFailed = (err) => ({
+    type: ActionTypes.LEADERS_FAILED,
+    payload: err
+});
+
+export const addLeaders = (leaders) => ({
+    type: ActionTypes.ADD_LEADERS,
+    payload: leaders
+});
+
+export const fetchLeaders = () => (dispatch) => {
+    dispatch(leadersLoading());
+    return fetch(`${url}/leaders`)
+        .then(res => {
+            if (res.ok)
+                return res;
+            else {
+                var error = new Error(`Error ${res.status}: ${res.statusText}`);
+                error.response = res;
+                throw error;
+            }
+        }, error => {
+            var errMsg = new Error(error.message);
+            throw errMsg;
+        })
+        .then(res => res.json())
+        .then(leaders => dispatch(addLeaders(leaders)))
+        .catch(err => dispatch(leadersFailed(err.message)));
+}
+
+// POST FEEDBACK
+
+export const addFeedback = feedback => ({
+    type: ActionTypes.POST_FEEDBACK,
+    payload: feedback
+});
+
+export const postFeedback = (firstName, lastname, email, telNum, agree, contactType, message) => dispatch => {
+    const newFeedback = {
+        firstName: firstName,
+        lastName: lastname,
+        email: email,
+        telNum: telNum,
+        agree: agree,
+        contactType: contactType,
+        message: message
+    }
+
+    return fetch(`${url}/feedback`, {
+            method: 'POST',
+            body: JSON.stringify(newFeedback),
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            credentials: 'same-origin'
+        })
+        .then(res => {
+            if (res.ok)
+                return res;
+            else {
+                var error = new Error(`Error ${res.status}: ${res.statusText}`);
+                error.response = res;
+                throw error;
+            }
+        }, error => {
+            var errMsg = new Error(error.message);
+            throw errMsg;
+        })
+        .then(res => res.json())
+        .then(res => {
+            dispatch(addFeedback(res));
+        })
+        .catch(err => {
+            alert(`Error Posting Comment: ${err.message}`);
+        });
+}
+
+export const feedbackFailed = (err) => ({
+    type: ActionTypes.FEEDBACKS_FAILED,
+    payload: err
+})
+
+export const addFeedbacks = (feedbacks) => ({
+    type: ActionTypes.ADD_FEEDBACKS,
+    payload: feedbacks
+})
+
+export const fetchFeedbacks = () => (dispatch) => {
+    return fetch(`${url}/feedback`)
+        .then(res => {
+            if (res.ok)
+                return res;
+            else {
+                var error = new Error(`Error ${res.status}: ${res.statusText}`);
+                error.response = res;
+                throw error;
+            }
+        }, error => {
+            var errMsg = new Error(error.message);
+            throw errMsg;
+        })
+        .then(res => res.json())
+        .then(feedbacks => dispatch(addFeedbacks(feedbacks)))
+        .catch(err => dispatch(feedbackFailed(err.message)));
+}

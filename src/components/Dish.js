@@ -22,16 +22,23 @@ import {
 import { Link } from 'react-router-dom';
 import Loader from './Loader.js';
 import { url } from '../shared/connection.js';
+import { FadeTransform, Fade, Stagger } from 'react-animation-components';
 
 const DishCard = ({ dish }) => {
     return(
-        <Card style={{width: '380px'}}>
-            <CardImg src={`${url}/${dish.image}`} alt={dish.name} />
-            <CardBody>
-                <CardTitle>{dish.name}</CardTitle>
-                <CardText>{dish.description}</CardText>
-            </CardBody>
-        </Card>
+        <FadeTransform
+            in
+            transformProps={{
+                exitTransform: 'scale(0.5) translateY(-50%)'
+            }}>
+            <Card style={{width: '380px'}}>
+                <CardImg src={`${url}/${dish.image}`} alt={dish.name} />
+                <CardBody>
+                    <CardTitle>{dish.name}</CardTitle>
+                    <CardText>{dish.description}</CardText>
+                </CardBody>
+            </Card>
+        </FadeTransform>
     );
 }
 
@@ -63,10 +70,12 @@ const DishDetails = ({ dish, comments, postComment, dishId }) => {
                 if(comment.dishId === dish.id) {
                     return (
                         <div key={comment.id}>
-                            <p>{comment.comment}</p>
-                            <p>-- {comment.author},&nbsp;
-                            {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(comment.date)))}
-                            </p>
+                            <Fade in>
+                                <p>{comment.comment}</p>
+                                <p>-- {comment.author},&nbsp;
+                                {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(comment.date)))}
+                                </p>
+                            </Fade>
                         </div>
                     );
                 }
@@ -184,11 +193,13 @@ function Dish({ dish, isLoading, errMsg, comments, errMsgComments, postComment }
                         </div>
                     </div>
                     <div className="row">
-                        <div className="col-6 col-md-5 m-1">
+                        <div className="col-6 col-md-2">
                             <DishCard dish={dish} />
                         </div>
-                        <div className="col-6 col-md-5 m-1">
-                            <DishDetails dish={dish} comments={comments} postComment={postComment} dishId={dish.id} />
+                        <div className="col-6 col-md-5 offset-5">
+                            <Stagger in>
+                                <DishDetails dish={dish} comments={comments} postComment={postComment} dishId={dish.id} />
+                            </Stagger>
                         </div>
                     </div>
                 </div>

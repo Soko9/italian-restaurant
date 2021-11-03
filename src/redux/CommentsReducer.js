@@ -7,11 +7,11 @@ export const CommentReducer = (state = {
         switch(action.type) {
             case ActionTypes.ADD_COMMENT:
                 var comment = action.payload;
-                return {...state, comments: state.comments.concat(comment)};
+                return {...state, comments: state.comments.concat(comment)}
             case ActionTypes.ADD_COMMENTS:
-                return {...state, err: null, comments: action.payload};
+                return {...state, err: null, comments: action.payload}
             case ActionTypes.COMMENTS_FAILED:
-                return {...state, err: action.payload, comments: []};
+                return {...state, err: action.payload, comments: []}
             default:
                 return state;
         }
