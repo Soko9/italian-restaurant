@@ -21,7 +21,6 @@ const ContactForm = ({ feedbacks, postFeedback, resetFeedback }) => {
     const handleSubmitEvent = values => {
         postFeedback(values.firstName, values.lastName, values.email, values.telNum, values.agree, values.contactType, values.message);
         resetFeedback();
-        // alert(feedbacks.filter(feedback => feedback.id%2 == 0));
     }
 
     return (
