@@ -9,7 +9,7 @@ import {
 } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import Loader from './Loader.js';
-import { url } from '../shared/connection.js';
+import { iUrl } from '../shared/connection.js';
 
 class Menu extends Component {
     render() {
@@ -18,9 +18,9 @@ class Menu extends Component {
                 <div key={dish.id} style={{width: '320px', cursor: 'pointer'}} className="col-12 col-md-5 m-1">
                     <Link to={`/menu/${dish.id}`}>
                         <Card>
-                            <CardImg height="310" src={`${url}/${dish.image}`} alt={dish.name} className="opacity-25"/>
+                            <CardImg height="290" src={`${iUrl}/${dish.image}`} alt={dish.name} className="opacity-25"/>
                             <CardImgOverlay>
-                                <CardTitle className="fs-2 fw-bold text-muted text-center opacity-75 p-3">{dish.name}</CardTitle>
+                                <CardTitle className="fs-3 fw-bold text-muted text-center opacity-75 p-3">{dish.name}</CardTitle>
                             </CardImgOverlay>
                         </Card>
                     </Link>

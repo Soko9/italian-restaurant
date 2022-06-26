@@ -21,7 +21,7 @@ import {
 } from 'react-redux-form';
 import { Link } from 'react-router-dom';
 import Loader from './Loader.js';
-import { url } from '../shared/connection.js';
+import { iUrl } from '../shared/connection.js';
 import { FadeTransform, Fade, Stagger } from 'react-animation-components';
 
 const DishCard = ({ dish }) => {
@@ -32,7 +32,7 @@ const DishCard = ({ dish }) => {
                 exitTransform: 'scale(0.5) translateY(-50%)'
             }}>
             <Card style={{width: '380px'}}>
-                <CardImg src={`${url}/${dish.image}`} alt={dish.name} />
+                <CardImg src={`${iUrl}/${dish.image}`} alt={dish.name} />
                 <CardBody>
                     <CardTitle>{dish.name}</CardTitle>
                     <CardText>{dish.description}</CardText>

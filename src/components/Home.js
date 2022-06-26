@@ -8,7 +8,7 @@ import {
     CardText
 } from 'reactstrap';
 import Loader from './Loader.js';
-import { url } from '../shared/connection.js';
+import { iUrl } from '../shared/connection.js';
 import { FadeTransform } from 'react-animation-components';
 
 const RenderCard = ({ item, isLoading, errMsg }) => {
@@ -24,7 +24,7 @@ const RenderCard = ({ item, isLoading, errMsg }) => {
                     exitTransform: 'scale(0.5) translateY(-50%)'
                 }}>
                 <Card>
-                    <CardImg src={`${url}/${item.image}`} alt={item.name} />
+                    <CardImg src={`${iUrl}/${item.image}`} alt={item.name} />
                     <CardBody>
                         <CardTitle>{item.name}</CardTitle>
                         {item.designation
